@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class = "container-fluid">
+
+        <div class="jumbotron">
+            <h1><center>Mission to Mars</center></h1>
+            <p><center><a class="btn btn-primary btn-lg" href="./scrape" role="button">
+                Scrape New Data</a></center></p>
+        </div>
+
+        {% for data in data %}
+
+        <div class = "row">
+            <div class = "col-md-12">
+                <h3>Latest Mars News</h3>
+                <h4>{{ data.news_title }}</h4>
+                <p>{{ data.news_p }}</p>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col-md-8">
+                <h3>Featured Mars Image</h3>
+                <img src = "{{ data.featured_image_url }}" 
+                alt = "Featured Image" width = "500" height = "400">
+            </div>
+
+            <div class = "col-md-4">
+                <h4>Current Weather on Mars</h4>
+                <p>{{ data.mars_weather }}</p>
+                <br>
+                <h4>Mars Facts</h4>
+                <table>{{ data.mars_html|safe }}</table>
+            </div>
+        </div>
+       
+        <div class = "row">
+            <h3><center>Mars Hemispheres</center></h3>
+            {% for hemisphere in data.hemisphere_image_urls %}
+            <div class = "col-md-6">
+                <h4>{{ hemisphere["title"] }}</h4>
+                <img src = "{{ hemisphere['img_url'] }}" 
+                alt = "Featured Image" width = "350" height = "350">
+            </div>
+            {% endfor %}
+        </div>
+        
+
+        {% endfor %}
+
+    </div>
+
+
+
+</body>
+
+
+
+
+</html>
